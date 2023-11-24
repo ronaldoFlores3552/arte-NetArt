@@ -1,4 +1,4 @@
-from flask import *+
+from flask import *
 import json
 from main import *
 

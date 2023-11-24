@@ -58,6 +58,6 @@ def save_ascii_to_image(ascii_str, font_path='arial.ttf', font_size=5):  # Reduc
     image.save('ascii_art2.png')
     return image
 
-ascii_str = convert_image_to_ascii('./img/caballos.jpg')
-print(ascii_str)
+ascii_str = convert_image_to_ascii('./static/img/caballos.jpg')
+#print(ascii_str)
 save_ascii_to_image(ascii_str)
