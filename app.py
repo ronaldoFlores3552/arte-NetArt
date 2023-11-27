@@ -16,7 +16,8 @@ def index():
         save_ascii_to_image(temp)
         to_img = url_for('static', filename='ascii_art2.png')
         print(to_img)
-        return render_template('index.html', to_img=to_img)
+        
+        return jsonify({'to_img': to_img})
 
 if __name__ == '__main__':
     app.run(debug=True)
