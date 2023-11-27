@@ -9,11 +9,13 @@ def index():
     if request.method == 'GET':
         return render_template('index.html')
     else:   
+        print('post')
+        
         image = request.files['image']
         temp = convert_image_to_ascii(image)
         aux = save_ascii_to_image(temp)
-        to_json = json.dump({'img_toascii' : temp})
-    return render_template('index.html', aux=aux)
+        to_img= "ascii_art2.png"
+        return render_template('index.html', to_img=to_img)
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -56,8 +56,7 @@ def save_ascii_to_image(ascii_str, font_path='arial.ttf', font_size=5):  # Reduc
     for i, line in enumerate(ascii_lines):
         draw.text((0, i*font_size), line, fill='black', font=font)
     image.save('ascii_art2.png')
-    return image
 
-ascii_str = convert_image_to_ascii('./static/img/caballos.jpg')
+#ascii_str = convert_image_to_ascii('./static/img/hero.png')
 #print(ascii_str)
-save_ascii_to_image(ascii_str)
+#save_ascii_to_image(ascii_str)
