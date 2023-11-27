@@ -13,8 +13,9 @@ def index():
         
         image = request.files['image']
         temp = convert_image_to_ascii(image)
-        aux = save_ascii_to_image(temp)
-        to_img= "ascii_art2.png"
+        save_ascii_to_image(temp)
+        to_img = url_for('static', filename='ascii_art2.png')
+        print(to_img)
         return render_template('index.html', to_img=to_img)
 
 if __name__ == '__main__':
