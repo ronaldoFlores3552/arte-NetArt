@@ -1,6 +1,6 @@
 from flask import *
 import json
-from main import *
+from image_toascii import *
 
 app = Flask(__name__)
 
@@ -14,9 +14,8 @@ def index():
         image = request.files['image']
         temp = convert_image_to_ascii(image)
         save_ascii_to_image(temp)
-        to_img = url_for('static', filename='ascii_art2.png')
+        to_img = url_for('static', filename='imagetoascii.png')
         print(to_img)
-        
         return jsonify({'to_img': to_img})
 
 if __name__ == '__main__':

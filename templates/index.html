@@ -34,113 +34,117 @@
 <!-- Add a background color and large text to the whole page -->
 <div class="w3-sand w3-grayscale w3-large">
 
-<!-- About Container -->
-<div class="w3-container" id="about">
-  <div class="w3-content" style="max-width:700px">
-    <h5 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">ABOUT THE Net.Art</span></h5>
-    <p>El net.art fusiona arte y tecnología en experiencias únicas en la web. Su accesibilidad global, interactividad y actualización constante lo convierten en una opción atractiva para coleccionistas digitales. ¡Descubre el arte del futuro y hazlo tuyo hoy!
-    </p>
-    <p>Explora obras que van más allá de los límites tradicionales, sumérgete en la interactividad única y sé parte de la evolución constante del net.art. Con la tokenización, aseguras autenticidad y exclusividad en tu colección digital. ¡No te pierdas la oportunidad de poseer arte que cambia el juego! Conéctate con el futuro en cada clic</p>
-    <div class="w3-panel w3-leftbar w3-light-grey">
-      <p><i>"La red es el lugar para la libertad de expresión, pero también es el lugar para la libertad de expresión estúpida"</i></p>
-      <p>Artista multimedia y músico ruso: Alexei Shulgin</p>
+  <!-- About Container -->
+  <div class="w3-container" id="about">
+    <div class="w3-content" style="max-width:700px">
+      <h5 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">ABOUT THE Net.Art</span></h5>
+      <p>El net.art fusiona arte y tecnología en experiencias únicas en la web. Su accesibilidad global, interactividad
+        y actualización constante lo convierten en una opción atractiva para coleccionistas digitales. ¡Descubre el arte
+        del futuro y hazlo tuyo hoy!
+      </p>
+      <p>Explora obras que van más allá de los límites tradicionales, sumérgete en la interactividad única y sé parte de
+        la evolución constante del net.art. Con la tokenización, aseguras autenticidad y exclusividad en tu colección
+        digital. ¡No te pierdas la oportunidad de poseer arte que cambia el juego! Conéctate con el futuro en cada clic
+      </p>
+      <div class="w3-panel w3-leftbar w3-light-grey">
+        <p><i>"La red es el lugar para la libertad de expresión, pero también es el lugar para la libertad de expresión
+            estúpida"</i></p>
+        <p>Artista multimedia y músico ruso: Alexei Shulgin</p>
+      </div>
     </div>
   </div>
-</div>
 
 
-<!-- Contact/Area Container -->
-<div class="w3-container" id="where" style="padding-bottom:32px;">
-  <div class="w3-content" style="max-width:700px">
-    <h5 class="w3-center w3-padding-48"><span class="w3-tag w3-wide">IMAGE</span></h5>
+  <!-- Contact/Area Container -->
+  <div class="w3-container" id="where" style="padding-bottom:32px;">
+    <div class="w3-content" style="max-width:700px">
+      <h5 class="w3-center w3-padding-48"><span class="w3-tag w3-wide">IMAGE</span></h5>
 
-    <form action="{{url_for('index')}}" method="post" enctype="multipart/form-data" onsubmit="sendImage(); return false;">
-      <label for="imagen">Selecciona una imagen:</label>
-      <input type="file" id="image" name="image" accept="image/*" onchange="previewImage()">
-      <p><button class="w3-button w3-black" type="submit">SEND IMAGE</button></p>
-    </form>
+      <form action="{{url_for('index')}}" method="post" enctype="multipart/form-data"
+        onsubmit="sendImage(); return false;">
+        <label for="imagen">Selecciona una imagen:</label>
+        <input type="file" id="image" name="image" accept="image/*" onchange="previewImage()">
+        <p><button class="w3-button w3-black" type="submit">SEND IMAGE</button></p>
+      </form>
+    </div>
   </div>
 
-  <div id="preview"></div>
-  <center>
-    {% if to_img %}
-      <img src="{{ to_img }}" alt="ASCII Art">
-    {% endif %}
-  </center>
+  <div class="w3-center" id="preview"></div>
 
-</div>
-
-<!-- End page content -->
+  {% if to_img %}
+  <img class="w3-center" src="{{ to_img }}" alt="ASCII Art">
+  {% endif %}>
 </div>
 
 <!-- Footer -->
 <footer class="w3-center w3-light-grey w3-padding-48 w3-large">
-  <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-text-green">w3.css</a></p>
+  <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank"
+      class="w3-hover-text-green">w3.css</a></p>
 </footer>
 
 <script>
-// Tabbed Menu
-function openMenu(evt, menuName) {
-  var i, x, tablinks;
-  x = document.getElementsByClassName("menu");
-  for (i = 0; i < x.length; i++) {
-    x[i].style.display = "none";
+  // Tabbed Menu
+  function openMenu(evt, menuName) {
+    var i, x, tablinks;
+    x = document.getElementsByClassName("menu");
+    for (i = 0; i < x.length; i++) {
+      x[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablink");
+    for (i = 0; i < x.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" w3-dark-grey", "");
+    }
+    document.getElementById(menuName).style.display = "block";
+    evt.currentTarget.firstElementChild.className += " w3-dark-grey";
   }
-  tablinks = document.getElementsByClassName("tablink");
-  for (i = 0; i < x.length; i++) {
-    tablinks[i].className = tablinks[i].className.replace(" w3-dark-grey", "");
+
+  function previewImage() {
+    var preview = document.getElementById('preview');
+    var fileInput = document.getElementById('image');
+    var file = fileInput.files[0];
+
+    if (file) {
+      var reader = new FileReader();
+
+      reader.onload = function (e) {
+        preview.innerHTML = '<img src="' + e.target.result + '" alt="Preview">';
+      };
+
+      reader.readAsDataURL(file);
+    } else {
+      preview.innerHTML = '';
+    }
   }
-  document.getElementById(menuName).style.display = "block";
-  evt.currentTarget.firstElementChild.className += " w3-dark-grey";
-}
 
-function previewImage() {
-  var preview = document.getElementById('preview');
-  var fileInput = document.getElementById('image');
-  var file = fileInput.files[0];
+  // Agrega esta función para enviar la imagen al servidor de forma asíncrona
+  function sendImage() {
+    var fileInput = document.getElementById('image');
+    var file = fileInput.files[0];
 
-  if (file) {
-    var reader = new FileReader();
+    if (file) {
+      var formData = new FormData();
+      formData.append('image', file);
 
-    reader.onload = function (e) {
-      preview.innerHTML = '<img src="' + e.target.result + '" alt="Preview">';
-    };
+      $.ajax({
+        type: 'POST',
+        url: '{{url_for("index")}}',
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function (data) {
+          // Manejar la respuesta del servidor
+          console.log('Imagen enviada con éxito:', data);
 
-    reader.readAsDataURL(file);
-  } else {
-    preview.innerHTML = '';
+          // Mostrar la imagen en el cliente
+          var preview = document.getElementById('preview');
+          preview.innerHTML = '<img src="' + data.to_img + '" alt="Preview">';
+        },
+        error: function (error) {
+          // Manejar errores si es necesario
+          console.error('Error al enviar la imagen:', error);
+        }
+      });
+    }
   }
-}
-
-// Agrega esta función para enviar la imagen al servidor de forma asíncrona
-function sendImage() {
-  var fileInput = document.getElementById('image');
-  var file = fileInput.files[0];
-
-  if (file) {
-    var formData = new FormData();
-    formData.append('image', file);
-
-    $.ajax({
-      type: 'POST',
-      url: '{{url_for("index")}}',
-      data: formData,
-      processData: false,
-      contentType: false,
-      success: function (data) {
-        // Manejar la respuesta del servidor
-        console.log('Imagen enviada con éxito:', data);
-
-        // Mostrar la imagen en el cliente
-        var preview = document.getElementById('preview');
-        preview.innerHTML = '<img src="' + data.to_img + '" alt="Preview">';
-      },
-      error: function (error) {
-        // Manejar errores si es necesario
-        console.error('Error al enviar la imagen:', error);
-      }
-    });
-  }
-}
 </script>
 {% endblock %}
