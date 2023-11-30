@@ -12,10 +12,9 @@ def index():
     else:        
         image = request.files['image']
         temp = convert_image_to_ascii(image) ## temp es la lista donde cada valor es una linea 
+        #print(temp)
+        return jsonify({'ascii_lines': temp})
 
-        print(temp)
-        to_img = url_for('static', filename='magetoascii.png')
-        return jsonify({'to_img': to_img})
 
 if __name__ == '__main__':
     app.run(debug=True)

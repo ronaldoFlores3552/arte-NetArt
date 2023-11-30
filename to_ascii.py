@@ -1,5 +1,4 @@
-from tkinter import *
-from tkinter import filedialog
+
 from PIL import Image, ImageOps
 import numpy as np
 import cv2

@@ -60,17 +60,20 @@
     <div class="w3-content" style="max-width:700px">
       <h5 class="w3-center w3-padding-48"><span class="w3-tag w3-wide">IMAGE</span></h5>
 
-      <form action="{{url_for('index')}}" method="post" enctype="multipart/form-data"
-        onsubmit="sendImage(); return false;">
+      <form action="{{url_for('index')}}" method="post" enctype="multipart/form-data" onsubmit="sendImage(); return false;" enctype="multipart/form-data">
         <label for="imagen">Selecciona una imagen:</label>
         <input type="file" id="image" name="image" accept="image/*" onchange="previewImage()">
         <p><button class="w3-button w3-black" type="submit">SEND IMAGE</button></p>
       </form>
-    </div>
-  </div>
 
-<!-- End page content -->
+  </div>
+  </div>
 </div>
+<!-- End page content -->
+
+<div class="w3-center" id="preview"></div>
+
+<ul class="w3-center" id="ascii-list"></ul>
 
 <!-- Footer -->
 <footer class="w3-center w3-light-grey w3-padding-48 w3-large">
@@ -98,14 +101,14 @@
     var preview = document.getElementById('preview');
     var fileInput = document.getElementById('image');
     var file = fileInput.files[0];
-
+  
     if (file) {
       var reader = new FileReader();
-
+  
       reader.onload = function (e) {
         preview.innerHTML = '<img src="' + e.target.result + '" alt="Preview">';
       };
-
+  
       reader.readAsDataURL(file);
     } else {
       preview.innerHTML = '';
@@ -116,11 +119,11 @@
   function sendImage() {
     var fileInput = document.getElementById('image');
     var file = fileInput.files[0];
-
+  
     if (file) {
       var formData = new FormData();
       formData.append('image', file);
-
+  
       $.ajax({
         type: 'POST',
         url: '{{url_for("index")}}',
@@ -129,11 +132,15 @@
         contentType: false,
         success: function (data) {
           // Manejar la respuesta del servidor
-          console.log('Imagen enviada con éxito:', data);
-
-          // Mostrar la imagen en el cliente
-          var preview = document.getElementById('preview');
-          preview.innerHTML = '<img src="' + data.to_img + '" alt="Preview">';
+          console.log('ASCII lines recibidas con éxito:', data.ascii_lines);
+  
+          // Mostrar las líneas ASCII en el cliente
+          var asciiList = document.getElementById('ascii-list');
+          data.ascii_lines.forEach(function(line) {
+            var listItem = document.createElement('li');
+            listItem.textContent = line;
+            asciiList.appendChild(listItem);
+          });
         },
         error: function (error) {
           // Manejar errores si es necesario
