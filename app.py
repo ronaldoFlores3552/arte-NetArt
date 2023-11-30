@@ -11,7 +11,7 @@ def index():
         return render_template('index.html')
     else:        
         image = request.files['image']
-        temp = convert_image_to_ascii(image) ## temp es la lista donde cada valor es una linea 
+        temp = convert_image_to_ascii(image) 
         #print(temp)
         return jsonify({'ascii_lines': temp})
 

@@ -71,7 +71,7 @@
 </div>
 <!-- End page content -->
 
-<div class="w3-center" id="preview"></div>
+<div class="w3-center imagen" id="preview"></div>
 
 <ul class="w3-center" id="ascii-list"></ul>
 
@@ -134,8 +134,11 @@
           // Manejar la respuesta del servidor
           console.log('ASCII lines recibidas con éxito:', data.ascii_lines);
   
-          // Mostrar las líneas ASCII en el cliente
+          // Limpiar el contenido del contenedor existente
           var asciiList = document.getElementById('ascii-list');
+          asciiList.innerHTML = '';
+  
+          // Mostrar las líneas ASCII en el contenedor (<ul>)
           data.ascii_lines.forEach(function(line) {
             var listItem = document.createElement('li');
             listItem.textContent = line;
