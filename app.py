@@ -1,6 +1,7 @@
 from flask import *
 import json
-from image_toascii import *
+from to_ascii import *
+from main import *
 
 app = Flask(__name__)
 
@@ -8,14 +9,12 @@ app = Flask(__name__)
 def index():
     if request.method == 'GET':
         return render_template('index.html')
-    else:   
-        print('post')
-        
+    else:        
         image = request.files['image']
-        temp = convert_image_to_ascii(image)
-        save_ascii_to_image(temp)
-        to_img = url_for('static', filename='imagetoascii.png')
-        print(to_img)
+        temp = convert_image_to_ascii(image) ## temp es la lista donde cada valor es una linea 
+
+        print(temp)
+        to_img = url_for('static', filename='magetoascii.png')
         return jsonify({'to_img': to_img})
 
 if __name__ == '__main__':
